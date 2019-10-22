@@ -72,7 +72,7 @@ require 'pry'
         :blocks => 7,
         :slam_dunks => 2
       },
-       {:player_name =>"Bismak Biyombo",
+       {:player_name =>"Bismack Biyombo",
         :number => 0,
         :shoe => 16,
         :points => 12,
@@ -201,6 +201,65 @@ end
  new_hash
  end
  
+def big_shoe_rebounds
+   shoe_size = 0
+   rebound = 0
+   game_hash.each do |place, team_data|
+      team_data[:players].each do |player_name, value|
+         if value[:shoe] > shoe_size
+            shoe_size = value[:shoe]
+            rebound = value[:rebounds]
+         end
+      end
+   end
+   rebound
+end
+
+def most_points_scored
+   most_point = 0
+   player = nil
+   game_hash.each do |place, team_data|
+      team_data[:players].each do |player_name, value|
+         if value[:points] > most_point
+            most_point = value[:points]
+            player = player_name
+         end
+     end
+   end
+   player
+end
+
+def winning_team
+  home_team = 0
+  away_team = 0
+  game_hash[:home][:players].each do |name, value|
+    home_team += value[:points]
+  end
+  game_hash[:away][:players].each do |name, value|
+    away_team += value[:points]
+  end
+  if home_team > away_team
+      game_hash[:home][:team_name]
+  elsif home_team < away_team
+      game_hash[:away][:team_name]
+  else
+      "It's a tie!"
+  end
+end
+
+def player_with_longest_name
+  longest = 0
+  player_name = nil
+  game_hash.each do |place, team_data|
+    team_data[:players].each do |name, value|
+      if name.length > longest
+        player_name = name
+      end
+    end
+  end
+  player_name
+end
+
 
 
 

@@ -1,4 +1,4 @@
-when i try# Hashketball
+I know ther when i try# Hashketball
 
 ## Learning Goals
 
