@@ -39,7 +39,7 @@ require 'pry'
         :number => 1,
         :shoe => 19,
         :points => 26,
-        :rebounds => 12,
+        :rebounds => 11,
         :assists => 6,
         :steals => 3,
         :blocks => 8,
@@ -78,7 +78,7 @@ require 'pry'
         :points => 12,
         :rebounds => 4,
         :assists => 7,
-        :steals => 7,
+        :steals => 22,
         :blocks => 15,
         :slam_dunks => 10
       },
@@ -102,13 +102,13 @@ require 'pry'
         :blocks => 1,
         :slam_dunks => 0
       },
-       {:player_name =>"Brendan Haywood" ,
+       {:player_name =>"Kemba Walker" ,
         :number => 33,
         :shoe => 15,
         :points => 6,
         :rebounds => 12,
         :assists => 12,
-        :steals => 22,
+        :steals => 7,
         :blocks => 5,
         :slam_dunks => 12
         }
@@ -119,20 +119,20 @@ require 'pry'
 
 end 
 
- def num_points_scored(players_name)
-   game_hash.each do |place,team|
-   team.each do |attribute, data|
-     if attribute == :players
-       data.each do |player|
-         if player[:player_name] == players_name
-           return player[:points]
+def num_points_scored(players_name)
+  game_hash.each do |place,team|
+  team.each do |attribute, data|
+    if attribute == :players
+      data.each do |player|
+        
+       if player[:player_name] == players_name
+          return player[:points]
          end
        end
      end
    end
- end
+  end
 end
- 
 
 
 def shoe_size(players_name)
@@ -205,7 +205,9 @@ def big_shoe_rebounds
    shoe_size = 0
    rebound = 0
    game_hash.each do |place, team_data|
-      team_data[:players].each do |player_name, value|
+     
+      team_data[:players].each do | value|
+        
          if value[:shoe] > shoe_size
             shoe_size = value[:shoe]
             rebound = value[:rebounds]
@@ -219,15 +221,18 @@ def most_points_scored
    most_point = 0
    player = nil
    game_hash.each do |place, team_data|
-      team_data[:players].each do |player_name, value|
+     
+      team_data[:players].each do |name,value|
+       
          if value[:points] > most_point
-            most_point = value[:points]
+            most_point = player_name[:points]
             player = player_name
          end
      end
    end
    player
 end
+
 
 def winning_team
   home_team = 0
@@ -249,11 +254,14 @@ end
 
 def player_with_longest_name
   longest = 0
-  player_name = nil
+  player_name =nil
   game_hash.each do |place, team_data|
+    
     team_data[:players].each do |name, value|
-      if name.length > longest
-        player_name = name
+      
+      if name[:player_name].length > longest 
+         player_name = name[:player_name]
+        longest=name[:player_name].length
       end
     end
   end
